@@ -31,6 +31,7 @@ export default function AuthProvider({children}) {
     async function SignUp(data) {
         try {
             const response = await axios.post('/auth/signup', data)
+            console.log(response);
             updAuthState({
                 username: response.data.user.username,
                 email: response.data.user.email,

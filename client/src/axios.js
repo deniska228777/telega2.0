@@ -5,7 +5,7 @@ const basic = axios.create({
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
     },
-    signal: AbortSignal.timeout(500)
+    withCredentials: true
 });
 
 export default basic;
