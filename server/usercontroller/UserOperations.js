@@ -13,4 +13,8 @@ export class UserOperations {
         const foundUser = await User.findOne({ email: email });
         return foundUser;
     }
+    static async findOneById({ id }) {
+        const foundUser = await User.findById(id)
+        return foundUser;
+    }
 }

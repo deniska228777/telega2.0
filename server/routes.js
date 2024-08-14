@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { UserOperations } from './usercontroller/UserOperations.js';
 import { TokenService } from './tokencontroller/TokenService.js';
 import dto from './usercontroller/dto.js';
+import User from './usercontroller/User.js';
 
 const validateEmail = (email) => {
     return String(email)
@@ -32,7 +33,9 @@ export const signup = async (req, res) => {
         res.json({
             message: "User created successfully",
             user: someUserData,
-            ...tokens
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken,
+            expiry: tokens.expiry
         });
     })
     .catch(err => {
@@ -67,8 +70,52 @@ export const login = async (req, res) => {
     const user = dto(foundUser);
     const tokens = TokenService.generateToken({...user})
     await TokenService.saveRefresh(user.id, tokens.refreshToken);
-    console.log(user)
+    res.cookie('refreshToken', tokens.refreshToken, {maxAge: 24 * 60 * 60 * 1000, httpOnly: true})
     res.status(200).send({
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+        expiry: tokens.expiry,
         user
     })
 };
+export const logout = async (req, res) => {
+    const { refreshToken } = req.cookies;
+    const token = await TokenService.deleteToken(refreshToken);
+    res.clearCookie('refreshToken');
+    return res.status(200).send(token)
+}
+export const refresh = async (req, res) => {
+    try {
+        const { refreshToken } = req.cookies;
+        const someUserData = TokenService.validateToken(refreshToken);
+        const findToken = await TokenService.findToken(refreshToken);
+        console.log(someUserData)
+        console.log(findToken)
+        if (!someUserData || !findToken) {
+            res.status(401).send('token doesnt exist')
+        }
+
+        const user = await UserOperations.findOneById({id: someUserData.id})
+        const { id, email, password } = user;
+        const userDto = {
+            id,
+            email,
+            password
+        }
+        const tokens = TokenService.generateToken({...userDto})
+        await TokenService.saveRefresh(user.id, tokens.refreshToken);
+
+        res.cookie('refreshToken', tokens.refreshToken, {maxAge: 24 * 60 * 60 * 1000, httpOnly: true})
+
+        res.status(200).send({
+            ...tokens,
+            user: userDto
+        })
+    } catch (error) {
+        console.log(error);
+    }
+} 
+export const getUsers = async (req, res) => {
+    const users = await User.find();
+    res.status(200).send(users);
+}
