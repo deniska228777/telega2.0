@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --main-color: rgb(0, 182, 199);
+    --my-grey: #b3b3b3;
+}
+
+.LeftNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+
+.LeftNavContent {
+    background: var(--my-grey);
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.LeftNav.active{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    z-index: 1;
+}

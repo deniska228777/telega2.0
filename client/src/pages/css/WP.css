@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.bodywp {
+    text-align: center;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.linkwp {
+    color: rgb(199, 0, 0);
+    text-decoration: none;
+}
+.linkwp:hover {
+    text-decoration: underline;
+}

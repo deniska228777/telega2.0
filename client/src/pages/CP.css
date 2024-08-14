@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --main-color: rgb(0, 182, 199);
+    --my-grey: #b3b3b3;
+    --active-green: rgb(0, 199, 0);
+}
+body {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+}
+.firstCircle {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--main-color), rgb(255, 255, 255));
+    clip-path: circle(10% at 40% 70%);
+    z-index: -1;
+}
+.secondCircle {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #b3b3b3;
+    clip-path: circle(10% at 60% 30%);
+    z-index: -1;
+}
+.SignUpForm, .LoginForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 20px;
+    z-index: 0;
+    width: 350px;
+    height: 430px;
+    background: #000;
+}
+.LoginForm {
+    gap: 100px;
+}
+.formDiv {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+input {
+    margin: 20px;
+}
+button[type="submit"] {
+    width: 100px;
+    padding: 5px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: 0;
+}
+input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #ffffff;
+    outline: 0;
+    width: 200px;
+    color: #fff;
+}
+.password {
+    margin: 0;
+    border: 0;
+    width: 190px;
+}
+input:focus:not(.password) {
+    border-bottom: 1px solid var(--active-green) !important;
+}
+input::placeholder {
+    color: #ffffff;
+}
+form > h1 {
+    margin: 30px;
+}
+.deleteModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    margin: 0;
+    font-size: 15px;
+    color: #fff;
+}
+.material-symbols-outlined {
+    user-select: none;
+    margin: 1px 5px 0 0;
+    font-size: 20px;
+}
+span {
+    position: relative;
+    color: red;
+    height: 20px;
+    width: 200px;
+    font-size: 10px;
+    font-weight: 500;
+}
+.inputDiv {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+}
+.changedButton {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-weight: 500;
+    z-index: 2;
+    margin: 5px 0 0 0;
+}
+.changedButton:hover {
+    color: rgb(0, 149, 255);
+}
+.firstCircleAnimation {
+    animation: 0.3s linear forwards firstAnimate;
+}
+
+@keyframes firstAnimate {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-320px);
+    }
+}
+.secondCircleAnimation {
+    animation: 0.3s linear forwards secondAnimate;
+}
+@keyframes secondAnimate {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(320px);
+    }
+}
+.firstCircleAnimationSignUp {
+    animation: 0.3s linear firstAnimateSignUp;
+}
+.secondCircleAnimationSignUp {
+    animation: 0.3s linear secondAnimateSignUp;
+}
+@keyframes firstAnimateSignUp {
+    0% {
+        transform: translateY(-320px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes secondAnimateSignUp {
+    0% {
+        transform: translateY(320px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+.errorDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(255, 168, 168);
+    text-align: center;
+    border: 1px solid rgb(255, 33, 33);
+    border-radius: 5px;
+    color: #000;
+    width: 80%;
+    height: 40px;
+    display: none;
+    margin: 0 0 10px 0;
+}
+.passAndCheck {
+    display: flex;
+    width: 83%;
+    align-items: center;
+    margin: 20px;
+    border-bottom: 1px solid #fff;
+}
+.passAndCheck:focus {
+    border-bottom: 1px solid var(--active-green) !important;
+}
+.checkbox {
+    margin: 0;
+    width: 10px;
+    height: 10px;
+}
+.wrapper {
+    padding: 3px;
+    z-index: 0;
+    background: linear-gradient(to left, var(--main-color), var(--my-grey));
+    animation: wrapper 3s infinite linear;
+    background-size: 400%;
+}
+
+@keyframes wrapper {
+    0% {
+        background-position: 80% 0%;
+    }
+    50% {
+        background-position: 20% 100%;
+    }
+    100% {
+        background-position: 80% 0%;
+    }
+}
