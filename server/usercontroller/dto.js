@@ -1,9 +1,9 @@
 export default function dto(user) {
-    const { id, username, email } = user;
+  const { id, username, email } = user;
 
-    return {
-        id: id,
-        username,
-        email
-    }
+  return {
+    id: id,
+    username,
+    email,
+  };
 }
