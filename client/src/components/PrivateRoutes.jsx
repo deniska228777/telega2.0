@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import axiosInstance from "../axios";
 
 export default function PrivateRoutes() {
-  const { expiry, LogOut, setExpiry, setToken } = useAuth();
+  const { expiry, LogOut, setExpiry, setToken, token } = useAuth();
   useEffect(() => {
     const checkTokenExpiry = async () => {
-      if (Date.now() / 1000 > parseInt(expiry, 10)) {
+      if (!token || Date.now() / 1000 > parseInt(expiry, 10)) {
         try {
           const newToken = await axiosInstance.get('/refreshtoken');
           setToken(newToken.data.accessToken);
@@ -22,6 +22,6 @@ export default function PrivateRoutes() {
       }
     };
     checkTokenExpiry();
-  }, [expiry]);
+  }, [expiry, token]);
   return <Outlet />;
 }

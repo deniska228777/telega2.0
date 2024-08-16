@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 
 const Auth = createContext();
 
+let updateAuthState;
+
 export default function AuthProvider({ children }) {
   const [username, setUsername] = useState(localStorage.getItem("username") || "");
   const [email, setEmail] = useState(localStorage.getItem("email") || "");
@@ -12,9 +14,9 @@ export default function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [expiry, setExpiry] = useState(localStorage.getItem("expiry") || "");
 
-  console.log(username, email, userId, expiry, token)
-
   const navigate = useNavigate();
+
+  console.log(username)
 
   function updAuthState(data) {
     const { username, email, userId, token, expiry } = data;
@@ -32,18 +34,13 @@ export default function AuthProvider({ children }) {
     localStorage.setItem("token", token);
   }
 
+  updateAuthState = updAuthState;
+
   async function SignUp(data) {
     try {
       const response = await axiosInstance.post("/auth/signup", data);
       console.log(response);
-      updAuthState({
-        username: response.data.user.username,
-        email: response.data.user.email,
-        userId: response.data.user.id,
-        expiry: response.data.expiry,
-        token: response.data.accessToken,
-      });
-      console.log(response.data.user.id);
+      console.log(response.data.user.username);
       navigate("/");
     } catch (error) {
       console.log(error)
@@ -52,14 +49,7 @@ export default function AuthProvider({ children }) {
   }
   async function Login(data) {
     try {
-      const response = await axiosInstance.post("/auth/login", data);
-      updAuthState({
-        username: response.data.user.username,
-        email: response.data.user.email,
-        userId: response.data.user.id,
-        expiry: response.data.expiry,
-        token: response.data.accessToken,
-      });
+      await axiosInstance.post("/auth/login", data);
       navigate("/");
     } catch (error) {
       localStorage.setItem("loginErr", error.response.data);
@@ -82,12 +72,14 @@ export default function AuthProvider({ children }) {
   }
   return (
     <Auth.Provider
-      value={{ username, email, userId, expiry, token, updAuthState, setToken, setExpiry, Login, SignUp, LogOut }}
+      value={{ username, email, userId, expiry, token, setToken, setExpiry, Login, SignUp, LogOut }}
     >
       {children}
     </Auth.Provider>
   );
 }
+
+export {updateAuthState};
 
 export const useAuth = () => {
   return useContext(Auth);

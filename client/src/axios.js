@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useAuth } from "./components/AuthProvider";
+import { updateAuthState } from "./components/AuthProvider";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:6556",
@@ -15,14 +15,12 @@ axiosInstance.interceptors.request.use(async (config) => {
 })
 
 axiosInstance.interceptors.response.use(async (config) => {
-  const { updAuthState } = useAuth();
-
-  updAuthState({
-    username: config.data.user.username,
-    email: config.data.user.email,
-    userId: config.data.user.id,
-    expiry: config.data.expiry,
-    token: config.data.accessToken
+  updateAuthState({
+    username: config.data?.user?.username,
+    email: config.data?.user?.email,
+    userId: config.data?.user?.id,
+    expiry: config.data?.expiry,
+    token: config.data?.accessToken
   })
 
   return config;

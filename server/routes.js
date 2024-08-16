@@ -27,11 +27,10 @@ export const signup = async (req, res) => {
   })
     .then(async (newUser) => {
       const someUserData = dto(newUser);
-      console.log({ ...someUserData });
       const tokens = TokenService.generateToken({ ...someUserData });
       await TokenService.saveRefresh(someUserData.id, tokens.refreshToken);
       res.cookie("refreshToken", tokens.refreshToken, {
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
       return res.json({
@@ -83,7 +82,7 @@ export const login = async (req, res) => {
   const tokens = TokenService.generateToken({ ...user });
   await TokenService.saveRefresh(user.id, tokens.refreshToken);
   res.cookie("refreshToken", tokens.refreshToken, {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   });
   return res.status(200).send({
@@ -104,7 +103,9 @@ export const logout = async (req, res) => {
 export const refresh = async (req, res) => {
   try {
     const { refreshToken } = req.cookies;
-    console.log(refreshToken)
+    if (!refreshToken) {
+      return res.status(401).send("token doesnt exist");
+    }
     const someUserData = TokenService.validateToken(refreshToken);
     const findToken = await Token.find({refreshToken: refreshToken})
     if (!someUserData || !findToken) {
@@ -112,11 +113,11 @@ export const refresh = async (req, res) => {
     }
 
     const user = await User.findById({ _id: someUserData.id });
-    const { id, email, password } = user;
+    const { id, email, username } = user;
     const userDto = {
       id,
       email,
-      password,
+      username,
     };
     const tokens = TokenService.generateToken({ ...userDto });
     await TokenService.saveRefresh(user.id, tokens.refreshToken);
