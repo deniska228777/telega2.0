@@ -14,7 +14,7 @@ export class UserOperations {
     return foundUser;
   }
   static async findOneById({ id }) {
-    const foundUser = await User.findById(id);
+    const foundUser = await User.findById({_id: id});
     return foundUser;
   }
 }

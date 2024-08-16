@@ -16,6 +16,6 @@ export const authChecker = (req, res, next) => {
     }
     next();
   } catch (error) {
-    res.status(401).send("expired");
+    return res.status(401).send("expired");
   }
 };

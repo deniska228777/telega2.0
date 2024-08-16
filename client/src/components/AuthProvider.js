@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import axios from "../axios.js";
+import axiosInstance from "../axios.js";
 import { useNavigate } from "react-router";
 
 const Auth = createContext();
@@ -12,12 +12,9 @@ export default function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [expiry, setExpiry] = useState(localStorage.getItem("expiry") || "");
 
+  console.log(username, email, userId, expiry, token)
+
   const navigate = useNavigate();
-  useEffect(() => {
-    if (token && Date.now() / 1000 > parseInt(expiry, 10)) {
-      LogOut();
-    }
-  }, [token, expiry]);
 
   function updAuthState(data) {
     const { username, email, userId, token, expiry } = data;
@@ -37,7 +34,7 @@ export default function AuthProvider({ children }) {
 
   async function SignUp(data) {
     try {
-      const response = await axios.post("/auth/signup", data);
+      const response = await axiosInstance.post("/auth/signup", data);
       console.log(response);
       updAuthState({
         username: response.data.user.username,
@@ -49,12 +46,13 @@ export default function AuthProvider({ children }) {
       console.log(response.data.user.id);
       navigate("/");
     } catch (error) {
+      console.log(error)
       localStorage.setItem("signupErr", error.response.data);
     }
   }
   async function Login(data) {
     try {
-      const response = await axios.post("/auth/login", data);
+      const response = await axiosInstance.post("/auth/login", data);
       updAuthState({
         username: response.data.user.username,
         email: response.data.user.email,
@@ -69,7 +67,7 @@ export default function AuthProvider({ children }) {
   }
   async function LogOut() {
     try {
-      await axios.post("/auth/logout");
+      await axiosInstance.post("/auth/logout");
       updAuthState({
         username: "",
         email: "",
@@ -84,7 +82,7 @@ export default function AuthProvider({ children }) {
   }
   return (
     <Auth.Provider
-      value={{ username, email, userId, expiry, token, Login, SignUp, LogOut }}
+      value={{ username, email, userId, expiry, token, updAuthState, setToken, setExpiry, Login, SignUp, LogOut }}
     >
       {children}
     </Auth.Provider>

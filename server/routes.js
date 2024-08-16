@@ -3,6 +3,7 @@ import { UserOperations } from "./usercontroller/UserOperations.js";
 import { TokenService } from "./tokencontroller/TokenService.js";
 import dto from "./usercontroller/dto.js";
 import User from "./usercontroller/User.js";
+import Token from "./tokencontroller/Token.js";
 
 const validateEmail = (email) => {
   return String(email)
@@ -33,7 +34,7 @@ export const signup = async (req, res) => {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      res.json({
+      return res.json({
         message: "User created successfully",
         user: someUserData,
         accessToken: tokens.accessToken,
@@ -56,10 +57,12 @@ export const signup = async (req, res) => {
       ) {
         console.log(err);
         const message = "Email should be unique!";
-        res.status(400).send(message);
+        return res.status(400).send(message);
       }
+      return res.status(500).send("Server error");
     });
 };
+
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -83,31 +86,32 @@ export const login = async (req, res) => {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
   });
-  res.status(200).send({
+  return res.status(200).send({
     accessToken: tokens.accessToken,
     refreshToken: tokens.refreshToken,
     expiry: tokens.expiry,
     user,
   });
 };
+
 export const logout = async (req, res) => {
   const { refreshToken } = req.cookies;
   const token = await TokenService.deleteToken(refreshToken);
   res.clearCookie("refreshToken");
   return res.status(200).send(token);
 };
+
 export const refresh = async (req, res) => {
   try {
     const { refreshToken } = req.cookies;
+    console.log(refreshToken)
     const someUserData = TokenService.validateToken(refreshToken);
-    const findToken = await TokenService.findToken(refreshToken);
-    console.log(someUserData);
-    console.log(findToken);
+    const findToken = await Token.find({refreshToken: refreshToken})
     if (!someUserData || !findToken) {
-      res.status(401).send("token doesnt exist");
+      return res.status(401).send("token doesnt exist");
     }
 
-    const user = await UserOperations.findOneById({ id: someUserData.id });
+    const user = await User.findById({ _id: someUserData.id });
     const { id, email, password } = user;
     const userDto = {
       id,
@@ -117,20 +121,19 @@ export const refresh = async (req, res) => {
     const tokens = TokenService.generateToken({ ...userDto });
     await TokenService.saveRefresh(user.id, tokens.refreshToken);
 
-    res.cookie("refreshToken", tokens.refreshToken, {
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-    });
-
-    res.status(200).send({
-      ...tokens,
+    return res.status(200).send({
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
+      expiry: tokens.expiry,
       user: userDto,
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).send("Internal Server Error");
   }
 };
+
 export const getUsers = async (req, res) => {
   const users = await User.find();
-  res.status(200).send(users);
+  return res.status(200).send(users);
 };

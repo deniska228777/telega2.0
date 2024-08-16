@@ -4,7 +4,7 @@ import Token from "./Token.js";
 export class TokenService {
   static generateToken(data) {
     const accessToken = jwt.sign(data, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: "20s",
+      expiresIn: "15m",
     });
     const refreshToken = jwt.sign(data, process.env.JWT_REFRESH_SECRET, {
       expiresIn: "7d",
@@ -23,7 +23,7 @@ export class TokenService {
     const findOne = await Token.findOne({ user: id });
     if (findOne) {
       findOne.refreshToken = refreshToken;
-      findOne.save();
+      await findOne.save();
     }
     const newToken = await Token.create({
       user: id,
@@ -33,14 +33,14 @@ export class TokenService {
   }
   static validateAccessToken(token) {
     if (!token) {
-      return;
+      return null;
     }
     const user = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
     return user;
   }
   static validateToken(token) {
     if (!token) {
-      return;
+      return null;
     }
     const user = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
     return user;

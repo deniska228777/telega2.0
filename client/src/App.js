@@ -14,11 +14,11 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/wrongpath" element={<WrongAdress />} />
-          <Route path="*" element={<Navigate to="/wrongpath" />} />
           <Route path="/auth" element={<CorePage />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/" element={<LeftNav />}>
+            <Route path="/wrongpath" element={<WrongAdress />} />
+            <Route path="*" element={<Navigate to="/wrongpath" />} />
               <Route index element={<Chats />} />
               <Route path="/profile" element={<h1>lol</h1>} />
             </Route>
