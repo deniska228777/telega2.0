@@ -1,0 +1,52 @@
+.Chat {
+  display: grid;
+  grid-template-areas:
+  "picture text text time";
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 50px 1fr auto;
+  background-color: transparent;
+  border-radius: 10px;
+  min-width: 100%;
+  min-height: 70px;
+  color: #e7e7e7;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 10px;
+  gap: 10px;
+  user-select: none;
+}
+.chatPicture {
+  grid-area: picture;
+  border-radius: 50%;
+  margin: 0;
+}
+.nameAndMessage {
+  grid-area: text;
+  margin: 0;
+}
+.lastMessage {
+  font-weight: 400;
+  color: #7c7c7c;
+}
+.time {
+  grid-area: time;
+  align-self: self-start;
+  padding: 15px 0 0 0;
+  color: #505050;
+  font-size: 13px;
+  margin: 0 0 0 auto;
+}
+.Chat:not(.Chat.active):hover {
+  background-color: #373737;
+}
+.active {
+  background: linear-gradient(to left, rgb(86, 75, 163), rgb(118,106,200));
+}
+.Chat.active .lastMessage {
+  font-weight: 400;
+  color: #e7e7e7;
+}
+.Chat.active .time {
+  color: #e7e7e7;
+} 

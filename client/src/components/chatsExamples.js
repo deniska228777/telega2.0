@@ -1,0 +1,111 @@
+import { v4 as uuidv4 } from 'uuid';
+import TeleTwoLogo from "./favicon.ico"
+
+export const chatsExamples = [
+{
+  id: uuidv4(),
+  name: 'TeleTwo',
+  time: '1:20',
+  lastMessage: 'Hello! Welcome to TeleTwo! How can i help you?',
+  img: TeleTwoLogo
+}, {
+  id: uuidv4(),
+  name: 'Anechka',
+  time: '1:22',
+  lastMessage: 'olyaolpwpfya',
+}, {
+  id: uuidv4(),
+  name: 'Anewfwefweya',
+  time: '1:20',
+  lastMessage: 'olfwefweaola',
+}, {
+  id: uuidv4(),
+  name: 'Anewfpechka',
+  time: '1:22',
+  lastMessage: 'olyaoewfplplflya',
+}, {
+  id: uuidv4(),
+  name: 'okweoknya',
+  time: '1:20',
+  lastMessage: 'olaola',
+}, {
+  id: uuidv4(),
+  name: 'kfeokwechka',
+  time: '1:22',
+  lastMessage: 'olwfefyaolya',
+}, {
+  id: uuidv4(),
+  name: 'Anya lyubima',
+  time: '1:2930',
+  lastMessage: 'olaol232a',
+}, {
+  id: uuidv4(),
+  name: 'ilyeeahka',
+  time: '1:2232',
+  lastMessage: 'olyaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'ewfijjwrya',
+  time: '1:2930',
+  lastMessage: 'olaol232a',
+}, {
+  id: uuidv4(),
+  name: 'iwefmweoahka',
+  time: '1:2232',
+  lastMessage: 'olyaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoahwdka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}, {
+  id: uuidv4(),
+  name: 'iwefewfmweoaefwhka',
+  time: '1:32232',
+  lastMessage: 'olyfwefaolwfwya',
+}]

@@ -44,7 +44,7 @@ export default function AuthProvider({ children }) {
       navigate("/");
     } catch (error) {
       console.log(error)
-      localStorage.setItem("signupErr", error.response.data);
+      localStorage.setItem("signupErr", error.response.data || 'unknown');
     }
   }
   async function Login(data) {

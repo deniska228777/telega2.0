@@ -15,8 +15,11 @@ const validateEmail = (email) => {
 
 export const signup = async (req, res) => {
   const { username, email, password } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).send('every field is required!');
+  }
   const hashPassword = bcrypt.hashSync(password, 10);
-  const emailMessage = "Please enter a valid Email or Password!";
+  const emailMessage = "Please enter a valid Email";
   if (!validateEmail(email)) {
     return res.status(400).send(emailMessage);
   }
@@ -42,24 +45,24 @@ export const signup = async (req, res) => {
       });
     })
     .catch((err) => {
+      console.log("Error caught:", err);
       if (
-        err.errorResponse.code === 11000 &&
-        Object.keys(err.errorResponse.keyPattern) == "username"
+        err.code == 11000 &&
+        Object.keys(err.keyPattern).includes("username")
       ) {
-        console.log(err);
         const message = "Username should be unique!";
         return res.status(400).send(message);
       }
       if (
-        err.errorResponse.code === 11000 &&
-        Object.keys(err.errorResponse.keyPattern) == "email"
+        err.code === 11000 &&
+        Object.keys(err.keyPattern).includes("email")
       ) {
-        console.log(err);
         const message = "Email should be unique!";
         return res.status(400).send(message);
       }
       return res.status(500).send("Server error");
     });
+    
 };
 
 

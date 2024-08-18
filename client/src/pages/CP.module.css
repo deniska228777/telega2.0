@@ -4,10 +4,10 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --main-color: rgb(0, 182, 199);
-    --my-grey: #b3b3b3;
+    --my-grey: rgb(42, 48, 55);
     --active-green: rgb(0, 199, 0);
 }
-body {
+.forms {
     display: flex;
     width: 100%;
     height: 100vh;
@@ -18,43 +18,14 @@ body {
     color: #fff;
     overflow: hidden;
 }
-.firstCircle {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, var(--main-color), rgb(255, 255, 255));
-    clip-path: circle(10% at 40% 70%);
-    z-index: -1;
-}
-.secondCircle {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: #b3b3b3;
-    clip-path: circle(10% at 60% 30%);
-    z-index: -1;
-}
 .SignUpForm, .LoginForm {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    border-radius: 20px;
     z-index: 0;
-    width: 350px;
-    height: 430px;
+    width: 25rem;
+    height: 30rem;
     background: #000;
 }
 .LoginForm {
@@ -68,35 +39,37 @@ body {
     justify-content: center;
     flex-direction: column;
 }
-input {
-    margin: 20px;
-}
 button[type="submit"] {
-    width: 100px;
-    padding: 5px;
+    width: 285px;
+    height: 30px;
     border: 0;
-    border-radius: 10px;
     cursor: pointer;
     outline: 0;
+    margin: 1px;
 }
-input {
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1px solid #ffffff;
+.username, .email, .password {
+    background-color: #2A3038;
+    border: 1px solid transparent;
     outline: 0;
-    width: 200px;
-    color: #fff;
+    width: 300px;
+    height: 30px;
+    color: #cacaca;
+    margin: 25px;
+    padding-left: 5px;
 }
 .password {
     margin: 0;
     border: 0;
-    width: 190px;
+    width: 280px;
 }
-input:focus:not(.password) {
-    border-bottom: 1px solid var(--active-green) !important;
+.email:focus:not(.password) {
+    border: 1px solid var(--active-green) !important;
+}
+.email:focus:not(.password) {
+    border: 1px solid var(--active-green) !important;
 }
 input::placeholder {
-    color: #ffffff;
+    color: #cacaca;
 }
 form > h1 {
     margin: 30px;
@@ -114,7 +87,7 @@ form > h1 {
     font-size: 15px;
     color: #fff;
 }
-.material-symbols-outlined {
+/* .material-symbols-outlined {
     user-select: none;
     margin: 1px 5px 0 0;
     font-size: 20px;
@@ -126,7 +99,7 @@ span {
     width: 200px;
     font-size: 10px;
     font-weight: 500;
-}
+} */
 .inputDiv {
     display: flex;
     justify-content: left;
@@ -161,36 +134,6 @@ span {
 .secondCircleAnimation {
     animation: 0.3s linear forwards secondAnimate;
 }
-@keyframes secondAnimate {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(320px);
-    }
-}
-.firstCircleAnimationSignUp {
-    animation: 0.3s linear firstAnimateSignUp;
-}
-.secondCircleAnimationSignUp {
-    animation: 0.3s linear secondAnimateSignUp;
-}
-@keyframes firstAnimateSignUp {
-    0% {
-        transform: translateY(-320px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-@keyframes secondAnimateSignUp {
-    0% {
-        transform: translateY(320px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
 .errorDiv {
     display: flex;
     justify-content: center;
@@ -207,23 +150,20 @@ span {
 }
 .passAndCheck {
     display: flex;
-    width: 83%;
+    width: 300px;
     align-items: center;
-    margin: 20px;
-    border-bottom: 1px solid #fff;
-}
-.passAndCheck:focus {
-    border-bottom: 1px solid var(--active-green) !important;
+    margin: 25px;
+    background-color: #2A3038;
+    border: 1px solid transparent;
 }
 .checkbox {
     margin: 0;
-    width: 10px;
-    height: 10px;
+    width: 13px;
 }
 .wrapper {
-    padding: 3px;
+    padding: 2px;
     z-index: 0;
-    background: linear-gradient(to left, var(--main-color), var(--my-grey));
+    background: linear-gradient(to left, var(--main-color), #2A3038);
     animation: wrapper 3s infinite linear;
     background-size: 400%;
 }
