@@ -16,7 +16,7 @@ export default function Chats() {
   const [filteredChats, setFilteredChats] = useState(chatsExamples);
   const onChangeInput = (e) => {
     const searchTerm = e.target.value;
-    if (searchTerm != '') {
+    if (searchTerm !== '') {
       closeRef.current.style.display = "flex";
     } else {
       closeRef.current.style.display = "none";
@@ -34,6 +34,7 @@ export default function Chats() {
   }
 
   const clearSearch = () => {
+    closeRef.current.style.display = "none";
     setSearch('');
     setFilteredChats(chatsExamples)
   }
@@ -84,6 +85,9 @@ export default function Chats() {
             />
           ))}
         </div>
+      </div>
+      <div className={styles.currentChat}>
+
       </div>
     </div>
   );

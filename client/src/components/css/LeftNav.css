@@ -17,8 +17,9 @@
     background-color: rgb(0, 0, 0, 0.5);
 }
 .LeftNavContent {
+    height: 100vh;
     background: var(--my-grey);
-    min-width: 200px;
+    min-width: 270px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +30,23 @@
     justify-content: start;
     align-items: start;
     z-index: 1;
+}
+
+@keyframes content-in {
+    0% {
+        transform: translateX(-270px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+@keyframes content-out {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-270px);
+    }
 }
 
 .menu-btn {
@@ -48,5 +66,5 @@
     background: #2f2f2f;
 }
 .menu-span {
-    color: #747474;
+    color: #9d9d9d;
 }
