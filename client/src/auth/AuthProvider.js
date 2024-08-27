@@ -79,7 +79,7 @@ export default function AuthProvider({ children }) {
         expiry: "",
         token: "",
       });
-      navigate("/auth");
+      navigate("/telega2.0/auth");
     } catch (err) {
       console.log(err);
     }

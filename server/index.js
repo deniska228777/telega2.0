@@ -13,7 +13,7 @@ const urlParser = bp.urlencoded({ extended: false });
 dotenv.config();
 const port = process.env.PORT || 6557;
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://deniska228777.github.io",
   credentials: true,
   optionSuccessStatus: 200,
 };
