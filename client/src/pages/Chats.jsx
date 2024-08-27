@@ -397,7 +397,7 @@ export default function Chats() {
               </div>
             </div>
             <div className={styles.messages}>
-              {!loading && chats[currentChatIndex]?.messages && chats[currentChatIndex].messages !== '' &&
+              {!loading && chats[currentChatIndex]?.messages && chats[currentChatIndex]?.messages !== '' &&
                   chats[currentChatIndex].messages.map((msg) => (
                     <Message key={msg.msgs.messageId} endRef={endRef} message={msg.msgs.messageText} sender={msg.msgs.sender}/> 
                   ))
