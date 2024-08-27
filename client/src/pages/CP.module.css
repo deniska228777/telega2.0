@@ -62,10 +62,10 @@ button[type="submit"] {
     border: 0;
     width: 280px;
 }
-.email:focus:not(.password) {
+.username:focus {
     border: 1px solid var(--active-green) !important;
 }
-.email:focus:not(.password) {
+.email:focus {
     border: 1px solid var(--active-green) !important;
 }
 input::placeholder {

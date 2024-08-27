@@ -19,7 +19,7 @@ export const signup = async (req, res) => {
     return res.status(400).send('every field is required!');
   }
   const hashPassword = bcrypt.hashSync(password, 10);
-  const emailMessage = "Please enter a valid Email";
+  const emailMessage = "Please enter a valid Emaildocker ";
   if (!validateEmail(email)) {
     return res.status(400).send(emailMessage);
   }

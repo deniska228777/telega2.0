@@ -9,6 +9,10 @@ export class UserOperations {
     });
     return newUser;
   }
+  static async findOneByUsername({ username }) {
+    const foundUser = await User.findOne({ username: username });
+    return foundUser;
+  }
   static async findOneByEmail({ email }) {
     const foundUser = await User.findOne({ email: email });
     return foundUser;

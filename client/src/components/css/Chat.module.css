@@ -27,18 +27,18 @@
 }
 .lastMessage {
   font-weight: 400;
-  color: #7c7c7c;
+  color: #898989;
 }
 .time {
   grid-area: time;
   align-self: self-start;
   padding: 15px 0 0 0;
-  color: #505050;
+  color: #656565;
   font-size: 13px;
   margin: 0 0 0 auto;
 }
-.Chat:not(.Chat.active):hover {
-  background-color: #373737;
+.Chat:hover {
+  background-color: #3c3c3c7e;
 }
 .active {
   background: linear-gradient(to left, rgb(86, 75, 163), rgb(118,106,200));

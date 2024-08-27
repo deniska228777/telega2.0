@@ -1,5 +1,5 @@
-import React from "react";
-import { Navigate, Route } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Navigate, Outlet, Route, useParams } from "react-router";
 import { Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import WrongAdress from "./pages/WrongPage.jsx";
@@ -10,6 +10,7 @@ import Chats from "./pages/Chats.jsx";
 import LeftNav from "./components/LeftNav.jsx";
 
 function App() {
+
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -18,7 +19,8 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="/wrongpath" element={<WrongAdress />} />
             <Route path="*" element={<Navigate to="/wrongpath" />} />
-              <Route index element={<Chats />} />
+              <Route path="/" element={<Chats />} />
+              <Route path=":id" element={<Chats />}/>
               <Route path="/profile" element={<h1>lol</h1>} />
             </Route>
         </Routes>

@@ -1,17 +1,18 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import axiosInstance from "../axios.js";
 import { useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
 
 const Auth = createContext();
 
 let updateAuthState;
 
 export default function AuthProvider({ children }) {
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [username, setUsername] = useState(localStorage.getItem("username") || "");
   const [email, setEmail] = useState(localStorage.getItem("email") || "");
   const [userId, setUserId] = useState(localStorage.getItem("userId") || "");
-
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  
   const [expiry, setExpiry] = useState(localStorage.getItem("expiry") || "");
 
   const navigate = useNavigate();
@@ -39,6 +40,13 @@ export default function AuthProvider({ children }) {
   async function SignUp(data) {
     try {
       const response = await axiosInstance.post("/auth/signup", data);
+      updateAuthState({
+        username: response.data?.user?.username,
+        email: response.data?.user?.email,
+        userId: response.data?.user?.id,
+        expiry: response.data?.expiry,
+        token: response.data?.accessToken
+      })
       console.log(response);
       console.log(response.data.user.username);
       navigate("/");
@@ -49,7 +57,14 @@ export default function AuthProvider({ children }) {
   }
   async function Login(data) {
     try {
-      await axiosInstance.post("/auth/login", data);
+      const response = await axiosInstance.post("/auth/login", data);
+      updateAuthState({
+        username: response.data?.user?.username,
+        email: response.data?.user?.email,
+        userId: response.data?.user?.id,
+        expiry: response.data?.expiry,
+        token: response.data?.accessToken
+      })
       navigate("/");
     } catch (error) {
       localStorage.setItem("loginErr", error.response.data);

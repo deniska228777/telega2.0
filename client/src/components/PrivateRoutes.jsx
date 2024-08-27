@@ -9,7 +9,7 @@ export default function PrivateRoutes() {
     const checkTokenExpiry = async () => {
       if (!token || Date.now() / 1000 > parseInt(expiry, 10)) {
         try {
-          const newToken = await axiosInstance.get('/refreshtoken');
+          const newToken = await axiosInstance.get('http://localhost:6556/refreshtoken');
           setToken(newToken.data.accessToken);
           setExpiry(newToken.data.expiry);
 
@@ -19,6 +19,9 @@ export default function PrivateRoutes() {
           console.error('Token Refresh Error', error);
           LogOut();
         }
+        if (!token) {
+          LogOut();
+        } 
       }
     };
     checkTokenExpiry();

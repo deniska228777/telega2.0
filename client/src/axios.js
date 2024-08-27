@@ -10,22 +10,18 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(async (config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  if (config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
   return config;
 })
 
 axiosInstance.interceptors.response.use(async (config) => {
-  updateAuthState({
-    username: config.data?.user?.username,
-    email: config.data?.user?.email,
-    userId: config.data?.user?.id,
-    expiry: config.data?.expiry,
-    token: config.data?.accessToken
-  })
+
 
   return config;
 }, async (error) => {
-  throw error;
+  return Promise.reject(error);
 })
 
 export default axiosInstance;

@@ -1,20 +1,13 @@
 import './css/Modal.css';
 
-export default function Modal({child, vis}) {
+export default function Modal({child, vis, setVis}) {
     return (
         <>
-            {vis
-                ?<div className='Modal active'>
-                    <div className="ModalContent" onClick={e => {
-                        if (e && e.stopPropagation) {
-                            e.stopPropagation()}
-                        }
-                    }>
-                        {child}
-                    </div>
+            <div className={vis ? 'Modal active' : 'Modal'} onClick={() => setVis(false)}>
+                <div className="ModalContent" onClick={e => e.stopPropagation()}>
+                    {child}
                 </div>
-                :''
-            }
+            </div>
         </>
     );
 }

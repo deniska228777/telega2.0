@@ -4,7 +4,6 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --main-color: rgb(0, 182, 199);
-    --my-grey: #b3b3b3;
 }
 
 .LeftNav {
@@ -18,12 +17,15 @@
 }
 .LeftNavContent {
     height: 100vh;
-    background: var(--my-grey);
-    min-width: 270px;
+    background: rgb(30, 37, 45);
+    min-width: 250px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px 0 0 0;
+    align-items: flex-start;
+    color: #ffffff;
+    user-select: none;
 }
 .LeftNav.active{
     display: flex;
@@ -63,8 +65,8 @@
     align-items: center;
 }
 .menu-btn:hover {
-    background: #2f2f2f;
+    background: rgba(68, 73, 78, 0.2);
 }
 .menu-span {
-    color: #9d9d9d;
+    color: #888888;
 }

@@ -1,23 +1,15 @@
-import { useRef, useState } from "react";
 import { Outlet } from "react-router";
 import "./css/LeftNav.css";
+import { hide, show } from "./visibility";
 
-export default function LeftNav({child}) {
-  const [vis, setVis] = useState(false);
-  const contentRef = useRef('');
+export default function LeftNav({child, vis, setVis, contentRef}) {
 
   return (
     <>
-      <button className="menu-btn" onClick={() => {
-        setTimeout(() => {setVis(true)}, 140);
-        contentRef.current.style.animation = "content-in .15s linear";
-      }}>
+      <button className="menu-btn" onClick={() => show(setVis, contentRef)}>
         <span className="material-symbols-outlined menu-span">menu</span>
       </button>
-      <div className={vis ? "LeftNav active" : "LeftNav"} onClick={() => {
-        contentRef.current.style.animation = "content-out .12s linear";
-        setTimeout(() => {setVis(false)}, 100);
-      }}>
+      <div className={vis ? "LeftNav active" : "LeftNav"} onClick={() => hide(setVis, contentRef)}>
         <div className="LeftNavContent" ref={contentRef} onClick={(e) => e.stopPropagation()}>
           {child}
         </div>

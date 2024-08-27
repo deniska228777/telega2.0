@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --main-color: rgb(86, 75, 163);
+  --my-grey: rgb(42, 48, 55);
+  --active-green: rgb(0, 199, 0);
+}
+
+.notMineMessage, .mineMessage {
+  display: flex;
+  margin: 1.4px 0;
+  padding: 0 5px;
+  min-height: 30px;
+  width: 100%;
+  color: #d7d7d7;
+}
+.notMineText, .mineText {
+  display: flex;
+  align-items: center;
+  padding: 7px 15px;
+  height: 100%;
+  max-width: 45%;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+.notMineText {
+  border-radius: 10px 20px 20px 5px;
+  background: var(--my-grey);
+}
+.mineText {
+  border-radius: 20px 10px 5px 20px;
+  background: linear-gradient(to left, rgb(86, 75, 163), rgb(118,106,200));
+}
+.notMineMessage {
+  justify-content: flex-start;
+}
+.mineMessage {
+  justify-content: flex-end;
+}
