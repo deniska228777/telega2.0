@@ -33,7 +33,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Используйте версию Node.js, совместимую с вашим проектом
+          node-version: '19' # Используйте версию Node.js, совместимую с вашим проектом
 
       - name: Install dependencies
         run: npm install
