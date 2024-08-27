@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import { useAuth } from "../auth/AuthProvider";
 import { useEffect } from "react";
 import axiosInstance from "../axios";
@@ -25,6 +25,6 @@ export default function PrivateRoutes() {
       }
     };
     checkTokenExpiry();
-  }, [expiry, token]);
+  }, [expiry, token, setExpiry, setToken, LogOut]);
   return <Outlet />;
 }

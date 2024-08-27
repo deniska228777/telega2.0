@@ -1,6 +1,5 @@
 import styles from '../css/Chat.module.css';
 import logo from '../user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.avif'
-import { useRef } from 'react';
 
 export const Chat = ({ name, lastMessage, time, isActive, onClick, img }) => {
   const classes = [styles.Chat];
@@ -14,7 +13,7 @@ export const Chat = ({ name, lastMessage, time, isActive, onClick, img }) => {
       className={classes.join(' ')}
       onClick={onClick}
     >
-      <img src={img || logo} width="50px" height="50px" className={styles.chatPicture}/>
+      <img src={img || logo} width="50px" height="50px" alt='user-icon' className={styles.chatPicture}/>
       <div className={styles.nameAndMessage}>
         <span className={styles.name}>{name}</span>
         <p className={styles.lastMessage}>

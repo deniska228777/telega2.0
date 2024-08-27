@@ -1,5 +1,4 @@
 import { forwardRef } from "react"
-import styles from '../pages/CP.module.css';
 
 const Input = forwardRef(({type, name, onChange, placeholder, value, style, disabled, onClick, className, id}, ref) => {
     return (

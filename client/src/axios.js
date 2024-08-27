@@ -1,5 +1,4 @@
 import axios from "axios";
-import { updateAuthState } from "./auth/AuthProvider";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:6556",
@@ -17,8 +16,6 @@ axiosInstance.interceptors.request.use(async (config) => {
 })
 
 axiosInstance.interceptors.response.use(async (config) => {
-
-
   return config;
 }, async (error) => {
   return Promise.reject(error);

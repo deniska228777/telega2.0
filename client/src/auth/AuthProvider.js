@@ -1,7 +1,6 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 import axiosInstance from "../axios.js";
 import { useNavigate } from "react-router";
-import { jwtDecode } from "jwt-decode";
 
 const Auth = createContext();
 

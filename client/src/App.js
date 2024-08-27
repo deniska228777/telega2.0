@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, Outlet, Route, useParams } from "react-router";
+import React from "react";
+import { Navigate, Route } from "react-router";
 import { Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import WrongAdress from "./pages/WrongPage.jsx";
@@ -7,7 +7,6 @@ import AuthProvider from "./auth/AuthProvider.js";
 import CorePage from "./pages/CorePage.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 import Chats from "./pages/Chats.jsx";
-import LeftNav from "./components/LeftNav.jsx";
 
 function App() {
 
