@@ -37,14 +37,16 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./client  # Укажите правильный путь к папке с package.json
 
       - name: Build the React app
         run: npm run build
+        working-directory: ./client  # Укажите правильный путь к папке с package.json
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build  # Путь к папке со сборкой
+          path: ./client/build  # Путь к папке со сборкой
 
   # Deployment job
   deploy:
